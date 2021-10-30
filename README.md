@@ -3,9 +3,10 @@ Requerimientos software:
 - Flask
 - Postgresql
 - Python3
-- 
+- Libreria psycopg2 (Python3 se instala con pip3)
+ 
 
-- Pasos para uso de software:
+Pasos para uso de software:
 
 1- Crear usuario tics en postgresql
 2- Crear bdd tics en postgresql
