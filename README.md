@@ -9,8 +9,11 @@ Requerimientos software:
 Pasos para uso de software:
 
 1- Crear usuario tics en postgresql
+
 2- Crear bdd tics en postgresql
+
 3- Asignar permisos de tics sobre la bdd creada
+
 4- Ejecutar el archivo setup.py con python3 (Configuración de tablas) :
       
       python3 setup.py
