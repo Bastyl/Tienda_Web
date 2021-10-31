@@ -1,0 +1,80 @@
+<html>
+<h1>DATOS:</h1>
+<form action="../index">
+    <input type="submit" value="Volver a la pagina principal" />
+</form>
+
+<div style="width:30%; height:200px; float:left;">
+
+<img src="../static/imagenes/{{delincuente[0][1]}}.jpg" height="100%" width="100%"/>
+
+</div>
+
+<div style="width:70%; height:200px; float:right ">
+  <p>Nombre:  {{delincuente[2]}} </p>
+  <p>Apellido:  {{delincuente[3]}}  {{delincuente[4]}}  </p>
+  <p>Edad: {{delincuente[5][0]}} </p>
+  <p>Rut: {{delincuente[1]}} </p>
+</div>
+
+
+<form action="" method="POST">
+  FORMULARIO PARA INGRESAR HISTORIAL:
+  <br>
+  SECTOR DE LO OCURRIDO:
+  <select name="sector">
+  <option value="Cerrillos ">Cerrillos</option>
+  <option value="Cerro Navia">Cerro Navia</option>
+  <option value="Conchali ">Conchali</option>
+  <option value="El bosque">El bosque</option>
+  <option value="La florida">La florida</option>
+  <option value="Macul ">Macul</option>
+  <option value="Las condes">Las condes</option>
+  <option value="La reina">La reina</option>
+  <option value="Lo prado">Lo pradoo</option>
+</select>
+
+  <br>
+  RELATO:<input type="text" name="historia">
+  <br>
+  FECHA:
+  <input type="date" name="fecha">
+  <br>
+  HORA APROXIMADA:
+  <input type="time" name="hora">
+  <br>
+  <input type="submit" value="INGRESAR">
+
+  <input type="submit" name="method_" value="ELIMINAR">
+  <input type="hidden" name="method_" value="NO_ELIMINAR">
+
+<br>
+<br>
+<br>
+<br>
+
+HISTORIAL DELICTUAL:
+<table border="1">
+  <tr>
+    <th>Lugar</th>
+    <th>Relato</th>
+    <th>Fecha</th>
+    <th>Hora</th>
+    <th>Eliminar</th>
+  </tr>
+{% for elem1 in historial %}
+<tr>
+  <td>{{elem1[2]}}</td>
+  <td>{{elem1[3]}}</td>
+  <td>{{elem1[4]}}</td>
+  <td>{{elem1[5][0]}}</td>
+  <td><input type="submit" name="method_2" placeholder="ELIMINAR RELATO" value="{{elem1[0][1]}}">
+  <input type="hidden" name="method_2" value="NO_ELIMINAR"></td>
+</tr>
+{% endfor %}
+
+</table>
+
+</form>
+
+</html>

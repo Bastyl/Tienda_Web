@@ -1,0 +1,42 @@
+<html>
+<h1>ESTADISTICAS DELICTUALES:</h1>
+<form action="index">
+    <input type="submit" value="Volver a la pagina principal" />
+</form>
+
+
+<table border="1">
+  <caption>Comunas con mas asaltos:</caption>
+  <tr>
+    <th>Comuna</th>
+    <th>Asaltos</th>
+  </tr>
+{% for i in comunas%}
+<tr>
+  <td>{{i[0]}}</td>
+  <td>{{i[1]}}</td>
+</tr>
+{% endfor %}
+<br><br>
+
+<table border="1">
+	<caption>Top delincuentes en santiago:</caption>
+  <tr>
+    <th>Nombre</th>
+    <th>Apellido</th>
+    <th>Edad</th>
+    <th>Numero de asaltos</th>
+  </tr>
+{% for i in datos %}
+<tr>
+  <td>{{i[2]}}</td>
+  <td>{{i[3]}} {{i[4]}}</td>
+  <td>{{i[5][0]}}</td>
+  <td>{{i[0][0]}}</td>
+  <td><a href="/delincuente/{{i[0][1]}}">Ver mas</a></td>
+</tr>
+{% endfor %}
+
+
+
+</html>

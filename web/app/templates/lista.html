@@ -1,0 +1,27 @@
+<html>
+<h1>LISTA DE SOSPECHOSOS</h1>
+<form action="index">
+    <input type="submit" value="Volver a la pagina principal" />
+</form>
+{% for elem1 in sospechosos %}
+
+<div style="width:30%; height:200px; float:left;">
+
+<img src="../static/imagenes/{{elem1[0][1]}}.jpg" height="100%" width="100%"/>
+
+</div>
+
+<div style="width:70%; height:200px; float:right ">
+Datos:
+<p>Nombre:  {{elem1[2]}} </p>
+<p>Apellido:  {{elem1[3]}}  {{elem1[4]}}  </p>
+<p>Edad: {{elem1[5][0]}} </p>
+  <a href="/delincuente/{{elem1[0][1]}}">Ver mas</a>
+
+
+</div>
+
+
+{% endfor %}
+
+</html>

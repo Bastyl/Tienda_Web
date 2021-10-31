@@ -1,0 +1,139 @@
+<h1>INGRESE LOS SIGUIENTES DATOS:</h1>
+<form action="index">
+    <input type="submit" value="Volver a la pagina principal" />
+</form>
+
+<form action="" method="POST">
+
+NOMBRE: <input type="varchar" name="nombre" min="1" max="20">
+<br>
+APELLIDO PATERNO: <input type="varchar" name="apellido_paterno" min="1" max="20">
+<br>
+APELLIDO MATERNO: <input type="varchar" name="apellido_materno" min="1" max="20">
+<br>
+RUT:  <input type="number" name="rut" >
+<br>
+EDAD:  <input type="number" name="edad" min="0" max="100">
+<br>
+ESTATURA: <input type="number" name="estatura" min="140" max="230">
+<br><br><br><br>
+
+INGRESE CARACTERISTICAS:
+<br>
+Sexo:
+  <select name="sexo">
+    <option value="">-</option>
+    <option value="masculino">masculino</option>
+    <option value="femenino">femenino</option>
+  </select>
+  <br><br>
+
+Color de ojos:
+  <select name="ojos">
+    <option value="">-</option>
+    <option value="negros">negros</option>
+    <option value="verdes">verdes</option>
+    <option value="azules">azules</option>
+  </select>
+  <br><br>
+
+Contextura física:
+<select name="contextura">
+  <option value="">-</option>
+  <option value="delgada">delgada</option>
+  <option value="atletica">atletica</option>
+  <option value="ancha">ancha</option>
+</select>
+  <br><br>
+
+Color de pelo:
+  <select name="pelo">
+    <option value="">-</option>
+    <option value="negro">negro</option>
+    <option value="castaño">castaño</option>
+    <option value="rubio">rubio</option>
+    <option value="pelirojo">pelirojo</option>
+    <option value="canoso">canoso</option>
+    <option value="tinturado">tinturado</option>
+  </select>
+  <br><br>
+
+Tez de piel:
+  <select name="piel">
+    <option value="">-</option>
+    <option value="palida">palida</option>
+    <option value="clara">clara</option>
+    <option value="bronceada">bronceada</option>
+    <option value="oscura">oscura</option>
+  </select>
+    <br><br>
+
+  Nacionalidad:
+  <select name="nacionalidad">
+    <option value="">-</option>
+    <option value="chilena">chilena</option>
+    <option value="extranjera">extranjera</option>
+  </select>
+  <br><br>
+
+  Tono de voz:
+  <select name="tono">
+    <option value="">-</option>
+    <option value="aguda">aguda</option>
+    <option value="medio">medio</option>
+    <option value="grave">grave</option>
+  </select>
+  <br><br>
+
+Tatuajes:
+  <br>
+  <input type="checkbox" name="tat1" value="1"> Cara <br>
+  <input type='hidden' name="tat1" value="0">
+
+  <input type="checkbox" name="tat2" value="1"> Torso <br>
+  <input type='hidden' name="tat2" value="0">
+
+  <input type="checkbox" name="tat3" value="1"> Brazos <br>
+  <input type='hidden' name="tat3" value="0">
+
+  <input type="checkbox" name="tat4" value="1"> Piernas <br>
+  <input type='hidden' name="tat4" value="0">
+
+
+<br>
+<br>
+
+INGRESE UN HISTORIAL:
+<br>
+SECTOR DE LO OCURRIDO:
+<!--
+<input type="varchar" name="sector" min="1" max="20">
+-->
+<select name="sector">
+  <option value="Cerrillos ">Cerrillos</option>
+  <option value="Cerro Navia">Cerro Navia</option>
+  <option value="Conchali ">Conchali</option>
+  <option value="El bosque">El bosque</option>
+  <option value="La florida">La florida</option>
+  <option value="Macul ">Macul</option>
+  <option value="Las condes">Las condes</option>
+  <option value="La reina">La reina</option>
+  <option value="Lo prado">Lo pradoo</option>
+</select>
+
+
+
+<br>
+RELATO:<input type="text" name="historia">
+<br>
+FECHA:
+<input type="date" name="fecha">
+<br>
+HORA APROXIMADA:
+<input type="time" name="hora">
+<input type='hidden' name="hora" value="00:00:00">
+<br>
+
+
+<input type="submit" value="INGRESAR">
+</form>
