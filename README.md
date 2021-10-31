@@ -28,3 +28,9 @@ Pasos para uso de software:
       
 7- Abrir página en cualquier navegador con las ruta localhost o 0.0.0.0
 8- Visualización de la Página Web
+
+LINKS DE INTERES:
+https://databaseandtech.wordpress.com/2019/10/24/como-crear-un-usuario-y-asignarle-permisos-en-postgresql/
+https://stackoverflow.com/questions/57236722/what-does-import-error-symbol-not-found-pqencryptpasswordconn-mean-and-how-do
+https://phoenixnap.com/kb/install-flask
+https://github.com/psycopg/psycopg2/issues/1018
