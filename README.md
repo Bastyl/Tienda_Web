@@ -8,9 +8,9 @@ Requerimientos software:
 
 Pasos para uso de software:
 
-1- Crear usuario tics en postgresql
+1- Crear usuario con nombre y password: "tics" en postgresql
 
-2- Crear bdd tics en postgresql
+2- Crear bdd llamada "tics" en postgresql
 
 3- Asignar permisos de tics sobre la bdd creada
 
