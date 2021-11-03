@@ -1,0 +1,27 @@
+<html>
+<h1>COJINES DISPONIBLES</h1>
+<form action="index">
+    <input type="submit" value="Volver a la pagina principal" />
+</form>
+{% for elem1 in datos %}
+
+<div style="width:30%; height:400px; float:left;">
+
+<img src="../static/cojines/{{elem1[0]}}.jpeg" height="100%" width="100%"/>
+
+</div>
+
+<div style="width:70%; height:400px; float:right ">
+<b>Datos:</b>
+<p>{{elem1[1]}} </p>
+<p>Cantidad: {{elem1[3]}} unidades </p>
+<p>Precio: $ {{elem1[3] * elem1[4]}} CLP </p>
+
+<a href="/ver_cojines/{{elem1[0]}}">Ver mas</a>
+
+</div>
+
+
+{% endfor %}
+
+</html>
