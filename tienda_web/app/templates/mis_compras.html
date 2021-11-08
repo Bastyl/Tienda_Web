@@ -1,0 +1,25 @@
+<div id="rojo" style="background-color: red;">
+  
+<h1> COMPRAS ASOCIADAS AL RUT INGRESADO:</h1><br>
+  <form action="../index">
+    <input type="submit" value="Volver a la pagina principal" />
+</form>
+  
+  <br><br>
+
+</div><br>
+
+{% for elem1 in compras %}
+<div id="verde" style="border-width:2px;border-style:solid;border-color:black;">
+<img src="../static/cojines/{{elem1[9]}}.jpeg" height="40%" width="30%"/>
+<div style="float:right;width:68%;height:40%">
+<p><b>Datos:</b></p>
+<p>Nombre del producto: {{elem1[16]}}</p>
+<p>tipo: {{elem1[15]}} - relleno: {{elem1[26]}} - tela: {{elem1[28]}}</p>
+<p>altura: {{elem1[22]}} cm - largo: {{elem1[23]}} cm </p>
+<p>cantidad comprada: {{elem1[10]}} - precio unitario (ACTUAL): {{elem1[19]}} -PRECIO PAGADO: {{elem1[19]*elem1[10]}} CLP</p>
+<p>Estado: {{elem1[11]}} - Fecha de compra: {{elem1[12]}}</p>
+<p>imagen de FACTURA: <a href="/miscompras/rut={{elem1[3]}}/{{elem1[0]}}/{{elem1[14]}}"> FACTURA IMAGEN </a></p>
+</div>
+<p></p>
+{% endfor %}
