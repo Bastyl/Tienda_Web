@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html >
+<head>
+	<style type="text/css">
+/* DivTable.com */
+
+img {
+  width: 150px;
+  height: 150px;
+}
+label {
+  margin: 10px;
+}
+</style>
+</head>
+
+
+<body>
+
+<h1> ARMA TU COJIN ! </h1>
+<form action="" method="POST">
+ 
+  <br>
+  Medida de cojin:
+  <select name="medida">
+  <option value="1">30x30</option>
+  <option value="2">50x50</option>
+  <option value="3">60x60</option>
+</select>
+<br>
+<br>
+    Relleno:
+  <select name="relleno">
+  <option value="2 ">Pluma</option>
+  <option value="1">Espuma</option>
+</select>
+<br>
+<br>
+Seleccione la Tela a elegir:
+<br>
+<br>
+{% for elem1 in datos %}
+  <input type="radio" name="tela" value="{{elem1[0]}}">
+  <label for="html"><img src="../static/telas/{{elem1[0]}}.jpeg" height="30%" width="20%"/></label><br>
+{% endfor %}
+
+<br>
+Ingrese cantidad de cojines a pedir:
+ <input type="number" name="cantidad" min="0" max="10">
+
+<hr>
+INGRESE SUS DATOS CON LOS QUE SERA CONTACTADO:
+
+<br>
+NOMBRE: <input type="varchar" name="nombre" min="1" max="20">
+<br>
+APELLIDO: <input type="varchar" name="apellido" min="1" max="20">
+<br>
+RUT:  <input type="number" name="rut" >
+<br>
+MAIL:  <input type="varchar" name="mail" min="0" max="100">
+<br>
+NUMERO TELEFONICO:  <input type="telefono" name="telefono" min="0" max="100">
+<br>
+CIUDAD: <input type="varchar" name="ciudad" min="0" max="230">
+<br>
+COMUNA:
+<select name="comuna">
+  <option value="Cerrillos ">Cerrillos</option>
+  <option value="Cerro Navia">Cerro Navia</option>
+  <option value="Conchali ">Conchali</option>
+  <option value="El bosque">El bosque</option>
+  <option value="La florida">La florida</option>
+  <option value="Macul ">Macul</option>
+  <option value="Las condes">Las condes</option>
+  <option value="La reina">La reina</option>
+  <option value="Lo prado">Lo prado</option>
+</select>
+<br>
+DIRECCION: <input type="varchar" name="direccion" min="0" max="230">
+<br><br>
+<hr>
+
+<input type="submit" value="HACER PEDIDO">
+ </form>
+
+
+
+</body>
+</html>

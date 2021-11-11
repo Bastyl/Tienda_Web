@@ -1,0 +1,39 @@
+<html>
+<h1>DATOS:</h1>
+<form action="../index">
+    <input type="submit" value="Volver a la pagina principal" />
+</form>
+<form action="/ver_cojines">
+    <input type="submit" value="Volver atras" />
+</form>
+
+{% for elem1 in datos %}
+<div style="width:30%; height:400px; float:left;">
+
+<img src="../static/cojines/{{elem1[0]}}.jpeg" height="100%" width="100%"/>
+
+</div>
+
+<div style="width:70%; height:400px; float:right ">
+<h3>Producto:</h3>
+<p><b>{{elem1[2]}} </b></p>
+<p>${{elem1[5]}} CLP </p>
+
+<h3>Detalles:</h3>
+<p>Altura: {{elem1[8]}} cm</p>
+<p>Ancho: {{elem1[9]}} cm</p>
+<p>Relleno: {{elem1[12]}} </p>
+<p>Tipo de tela: {{elem1[14]}} </p>
+<br>
+<h3>Cantidad Disponible: {{elem1[4]}} unidades </h3>
+
+<form action="/comprar/{{elem1[0]}}">
+Cantidad a comprar:  <input type="number" name="cantidad" min="0" max="{{elem1[4]}}">
+    <input type="submit" value="Comprar Producto"/>
+</form>
+</div>
+
+
+{% endfor %}
+
+</html>

@@ -1,0 +1,38 @@
+<h1>INGRESA LOS DATOS DEL COJIN</h1>
+
+<form action="administrar">
+    <input type="submit" value="Volver a la pagina principal" />
+</form>
+
+<form action="" method="POST">
+
+titulo: <input type="varchar" name="nombre" min="1" max="20">
+<br>
+stock: <input type="number" name="stock" >
+<br>
+precio unitario: <input type="number" name="precio" >
+<br>
+tipo tela:
+<select name="tela">
+    <option value="1">algodon</option>
+    <option value="2">lana</option>
+    <option value="3">seda</option>
+    <option value="4">poliester</option>
+    <option value="5">viscosa</option>
+  </select>
+<br>
+tipo relleno:
+<select name="relleno">
+    <option value="1">espuma</option>
+    <option value="2">pluma</option>
+  </select>
+<br>
+altura: <input type="number" name="altura" >
+<br>
+ancho: <input type="number" name="ancho" >
+<br><br>
+ADJUNTE FOTO: <input type="file" name="adjunto" accept=".pdf,.jpg,.png" multiple />
+<br><br>
+
+<input type="submit" value="INGRESAR">
+</form>
