@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html >
+<head>
+	<style type="text/css">
+/* DivTable.com */
+h1 {
+  text-align: center;
+}
+img {
+  width: 150px;
+  height: 150px;
+}
+label {
+  margin: 10px;
+}
+</style>
+
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+</head>
+
+
+<body>
+
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand" href="index">Inicio</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarColor02">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+          <a class="nav-link" href="/ver_cojines">Ver Cojines</a>
+        </li>
+        <li class="nav-item active">
+          <a class="nav-link" href="/armatucojin">Arma tu cojin</a>
+        </li>
+      </ul>
+      <form class="form-inline" action="/miscompras">
+
+        <input class="form-control mr-sm-2" type="number" name="rut" placeholder="RUT"/>
+        <input class="btn btn-outline-light my-2 my-sm-0" type="submit" value="Ver mis compras"/>
+
+      </form>
+    </div>
+  </nav>
+
+<h1> ARMA TU COJIN ! </h1>
+<form action="" method="POST">
+ 
+ <h2>Ingresa los detalles de tu pedido:</h2>
+  <br>
+  <b>Medida de cojin:</b>
+  <select name="medida">
+  <option value="1">30x30</option>
+  <option value="2">50x50</option>
+  <option value="3">60x60</option>
+</select>
+<br>
+<br>
+    <b>Relleno:</b>
+  <select name="relleno">
+  <option value="2 ">Pluma</option>
+  <option value="1">Espuma</option>
+</select>
+<br>
+<br>
+<b>Seleccione la Tela a elegir:</b>
+<br>
+<br>
+{% for elem1 in datos %}
+  <input type="radio" name="tela" value="{{elem1[0]}}">
+  <label for="html"><img src="../static/telas/{{elem1[0]}}.jpeg" height="30%" width="20%"/></label><br>
+{% endfor %}
+
+<br>
+<b>Ingrese cantidad de cojines a pedir:</b>
+ <input type="number" name="cantidad" min="0" max="10">
+
+<hr>
+<b>INGRESE SUS DATOS CON LOS QUE SERA CONTACTADO:</b>
+
+<br>
+NOMBRE: <input type="varchar" name="nombre" min="1" max="20">
+<br>
+APELLIDO: <input type="varchar" name="apellido" min="1" max="20">
+<br>
+RUT:  <input type="number" name="rut" >
+<br>
+MAIL:  <input type="varchar" name="mail" min="0" max="100">
+<br>
+NUMERO TELEFONICO:  <input type="telefono" name="telefono" min="0" max="100">
+<br>
+CIUDAD: <input type="varchar" name="ciudad" min="0" max="230">
+<br>
+COMUNA:
+<select name="comuna">
+  <option value="Cerrillos ">Cerrillos</option>
+  <option value="Cerro Navia">Cerro Navia</option>
+  <option value="Conchali ">Conchali</option>
+  <option value="El bosque">El bosque</option>
+  <option value="La florida">La florida</option>
+  <option value="Macul ">Macul</option>
+  <option value="Las condes">Las condes</option>
+  <option value="La reina">La reina</option>
+  <option value="Lo prado">Lo prado</option>
+</select>
+<br>
+DIRECCION: <input type="varchar" name="direccion" min="0" max="230">
+<br><br>
+<hr>
+
+<input type="submit" value="HACER PEDIDO">
+ </form>
+
+
+</body>
+</html>
