@@ -16,6 +16,5 @@ app = Flask(__name__)
 @app.route("/",methods=['POST','GET'])
 def index():
     sql = """SELECT * FROM tela;"""
-	cur.execute(sql)
-	lista_cojines = cur.fetchall()
-    return render_template("index.html",datos=lista_cojines)
+
+    return render_template("index.html")
