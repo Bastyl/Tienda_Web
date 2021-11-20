@@ -17,5 +17,6 @@ app = Flask(__name__)
 def index():
     sql = """SELECT * FROM tela;"""
     cur.execute(sql)
+    a = cur.fetchall()
 
     return render_template("index.html")
