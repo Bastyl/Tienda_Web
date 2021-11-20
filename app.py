@@ -19,4 +19,4 @@ def index():
     cur.execute(sql)
     a = cur.fetchall()
 
-    return render_template("index.html")
+    return render_template("index.html",data=a)
