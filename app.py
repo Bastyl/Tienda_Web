@@ -13,7 +13,7 @@ cur = conn.cursor()
 
 app = Flask(__name__)
 
-@app.route("/")
+@app.route("/",methods=['POST','GET'])
 def index():
     sql = """SELECT * FROM tela;"""
 	cur.execute(sql)
