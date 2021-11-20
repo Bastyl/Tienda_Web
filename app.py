@@ -14,7 +14,4 @@ app = Flask(__name__)
 
 @app.route("/")
 def index():
-    	sql = """SELECT * FROM tela;"""
-	cur.execute(sql)
-	lista = cur.fetchall()
-    return render_template("index.html",datos=lista)
+    return render_template("index.html")
