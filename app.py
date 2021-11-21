@@ -26,8 +26,6 @@ def ver_cojines():
 	cur.execute(sql)
 	lista_cojines = cur.fetchall()
 
-	print(lista_cojines)
-
 	return render_template("ver_cojines.html",datos=lista_cojines)
 
 @app.route('/ver_cojines/<id>',methods=['GET','POST'])
@@ -35,7 +33,6 @@ def cojin_especifico(id):
 	sql = """SELECT * FROM producto, caracteristicas_cojin, relleno, tela WHERE producto.id = '%s' AND producto.caracteristicas_id = caracteristicas_cojin.id AND caracteristicas_cojin.id_relleno = relleno.id AND caracteristicas_cojin.id_tela = tela.id;"""%(id)
 	cur.execute(sql)
 	cojin_especifico = cur.fetchall()
-	print(cojin_especifico)
 	return render_template("cojin_especifico.html",datos=cojin_especifico)
 
 @app.route('/comprar/<id>',methods=['POST','GET'])
