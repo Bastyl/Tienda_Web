@@ -26,7 +26,7 @@ engine = create_engine(DB_URI)
 @app.route('/')
 @app.route('/index',methods=['POST','GET'])
 def index():
-	data = DB_URI
+	data = engine
 	return render_template("index.html",data=data)
 
 @app.route('/ver_cojines',methods=['POST','GET'])
