@@ -20,8 +20,8 @@ app = Flask(__name__)
 
 ###
 login_manager = LoginManager()
-login_manager.login_view = 'app.login'
-login_manager.init_app(app)
+#login_manager.login_view = 'app.login'
+#login_manager.init_app(app)
 ###
 @app.route('/')
 @app.route('/index',methods=['POST','GET'])
