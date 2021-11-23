@@ -13,6 +13,12 @@ cur = conn.cursor()
 
 app = Flask(__name__)
 
+##
+from config import Config
+from flask_sqlalchemy import SQLAlchemy
+from sqlalchemy import create_negine
+##
+
 
 @app.route('/')
 @app.route('/index',methods=['POST','GET'])
