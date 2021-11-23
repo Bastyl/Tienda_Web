@@ -3,11 +3,6 @@ from flask import request
 import datetime
 from flask import Flask
 
-###
-from flask_login import LoginManager,login_user,login_required, current_user, logout_user
-from werkzeug.security import generate_password_hash, check_password_hash
-from flask import flash, Blueprint
-###
 import os
 import psycopg2
 
@@ -18,10 +13,6 @@ cur = conn.cursor()
 
 app = Flask(__name__)
 
-###
-login_manager = LoginManager()
-login_manager.init_app(app)
-###
 
 @app.route('/')
 @app.route('/index',methods=['POST','GET'])
