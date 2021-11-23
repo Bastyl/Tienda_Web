@@ -14,9 +14,9 @@ cur = conn.cursor()
 app = Flask(__name__)
 
 #######
-from config import Config
-from flask_sqlalchemy import SQLAlchemy
-from sqlalchemy import create_negine
+#from config import Config
+#from flask_sqlalchemy import SQLAlchemy
+#from sqlalchemy import create_negine
 #app.config.from_object(Config)
 #DB_URI = application.config['SQLALCHEMY_DATABASE_URI']
 #engine = create_engine(DB_URI)
