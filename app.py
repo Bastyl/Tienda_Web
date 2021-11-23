@@ -32,7 +32,7 @@ def register():
                    email=email, password=password_hash)
     return jsonify({'user_added': True})
 
-@application.route('/sign_in', methods=["GET", "POST"])
+@app.route('/sign_in', methods=["GET", "POST"])
 def sign_in():
     username_entered = request.args.get('username')
     password_entered = request.args.get('password')
