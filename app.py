@@ -16,7 +16,7 @@ app = Flask(__name__)
 ##
 from config import Config
 from flask_sqlalchemy import SQLAlchemy
-from sqlalchemy import create_negine
+from sqlalchemy import create_engine
 ##
 
 
