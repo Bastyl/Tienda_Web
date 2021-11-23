@@ -3,6 +3,11 @@ from flask import request
 import datetime
 from flask import Flask
 
+###
+from flask_login import LoginManager,login_user,login_required, current_user, logout_user
+from werkzeug.security import generate_password_hash, check_password_hash
+from flask import flash, Blueprint
+###
 import os
 import psycopg2
 
@@ -12,15 +17,6 @@ conn = psycopg2.connect(DATABASE_URL, sslmode='require')
 cur = conn.cursor()
 
 app = Flask(__name__)
-
-#######
-#from config import Config
-#from flask_sqlalchemy import SQLAlchemy
-#from sqlalchemy import create_engine
-#app.config.from_object(Config)
-#DB_URI = application.config['SQLALCHEMY_DATABASE_URI']
-#engine = create_engine(DB_URI)
-#######
 
 @app.route('/')
 @app.route('/index',methods=['POST','GET'])
