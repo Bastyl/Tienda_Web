@@ -15,32 +15,34 @@ app = Flask(__name__)
 
 ##
 from config import Config
+from config import User
 from flask_sqlalchemy import SQLAlchemy
-from sqlalchemy import create_engine
+from flask_login import LoginManager,login_user,login_required, current_user, logout_user
+
+db = SQLAlchemy()
 app.config.from_object(Config)
-DB_URI = app.config['SQLALCHEMY_DATABASE_URI']
-engine = create_engine(DB_URI)
+db.init_app(app)
+login_manager = LoginManager()
+login_manager.login_view = 'app.login'
+login_manager.init_app(app)
 
-@app.route('/register', methods=["GET", "POST"])
-def register():
-    username = request.args.get('username')
-    email = request.args.get('email')
-    password = request.args.get('password')
-    password_hash = generate_password_hash(password)
-    account = Table('account', metadata, autoload=True)
-    engine.execute(account.insert(), username=username,
-                   email=email, password=password_hash)
-    return jsonify({'user_added': True})
+@app.route('/login', methods=['POST'])
+def login_post():
+    email = request.form.get('email')
+    password = request.form.get('password')
+    remember = True if request.form.get('remember') else False
 
-@app.route('/sign_in', methods=["GET", "POST"])
-def sign_in():
-    username_entered = request.args.get('username')
-    password_entered = request.args.get('password')
-    user = session.query(Accounts).filter(or_(Accounts.username == username_entered, Accounts.email == username_entered)
-                                          ).first()
-    if user is not None and check_password_hash(user.password, password_entered):
-        return jsonify({'signed_in': True})
-    return jsonify({'signed_in': False})
+    user = User.query.filter_by(email=email).first()
+
+    # check if the user actually exists
+    # take the user-supplied password, hash it, and compare it to the hashed password in the database
+    if not user or not check_password_hash(user.password, password):
+        flash('Please check your login details and try again.')
+        return redirect(url_for('app.login')) # if the user doesn't exist or password is wrong, reload the page
+
+    # if the above check passes, then we know the user has the right credentials
+    login_user(user, remember=remember)
+    return redirect(url_for('app.profile'))
 ##
 
 
