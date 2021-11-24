@@ -7,9 +7,18 @@ class Config(object):
 	SECRET_KEY = os.urandom(24)
 	SQLALCHEMY_DATABASE_URI = os.environ['DATABASE_URL']
 	
+from werkzeug.security import generate_password_hash, check_password_hash
 
-class User(UserMixin, db.Model):
-    id = db.Column(db.Integer, primary_key=True) # primary keys are required by SQLAlchemy
-    email = db.Column(db.String(100), unique=True)
-    password = db.Column(db.String(100))
-    name = db.Column(db.String(1000))
+class User(UserMixin):
+    def __init__(self, id, username, email, password, is_admin=False):
+        self.id = id
+        self.username = username
+        self.email = email
+        self.password = generate_password_hash(password)
+        self.is_admin = is_admin
+    def set_password(self, password):
+        self.password = generate_password_hash(password)
+    def check_password(self, password):
+        return check_password_hash(self.password, password)
+    def __repr__(self):
+        return '<User {}>'.format(self.email)
