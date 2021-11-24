@@ -31,8 +31,7 @@ from config import User
 @app.route('/')
 @app.route('/index',methods=['POST','GET'])
 def index():
-	data = 333
-	return render_template("index.html",data=data)
+	return render_template("index.html")
 
 @app.route('/ver_cojines',methods=['POST','GET'])
 def ver_cojines():
