@@ -14,6 +14,7 @@ cur = conn.cursor()
 app = Flask(__name__)
 
 ##
+db = SQLAlchemy()
 from config import Config
 from config import User
 #from flask_sqlalchemy import SQLAlchemy
