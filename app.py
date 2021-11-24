@@ -16,8 +16,8 @@ app = Flask(__name__)
 ##
 from config import Config
 from config import User
-from flask_sqlalchemy import SQLAlchemy
-from flask_login import LoginManager,login_user,login_required, current_user, logout_user
+#from flask_sqlalchemy import SQLAlchemy
+#from flask_login import LoginManager,login_user,login_required, current_user, logout_user
 
 #db = SQLAlchemy()
 #app.config.from_object(Config)
