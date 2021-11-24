@@ -1,6 +1,6 @@
 import os
 from flask_login import UserMixin
-from app import db
+
 
 class Config(object):
 	SQLALCHEMY_TRACK_MODIFICATIONS = True
