@@ -15,38 +15,41 @@ app = Flask(__name__)
 
 ##
 from flask_sqlalchemy import SQLAlchemy
-from flask_login import LoginManager,login_user,login_required, current_user, logout_user
-db = SQLAlchemy()
-from config import Config
-from config import User
+from flask_login import LoginManager
+import os
+from config import Config, users
+app.config['DATABASE_URL'] = os.environ['DATABASE_URL']
 
-app.config.from_object(Config)
-db.init_app(app)
-login_manager = LoginManager()
-login_manager.login_view = 'app.login'
-login_manager.init_app(app)
+class LoginForm(FlaskForm):
+    email = StringField('Email', validators=[DataRequired()])
+    password = PasswordField('Password', validators=[DataRequired()])
+    remember_me = BooleanField('Recuérdame')
+    submit = SubmitField('Login')
+	
+login_manager = LoginManager(app)
 
 @login_manager.user_loader
 def load_user(user_id):
-    return User.query.get(int(user_id))
+    for user in users:
+        if user.id == int(user_id):
+            return user
+    return None
 
-@app.route('/login', methods=['POST'])
-def login_post():
-    email = request.form.get('email')
-    password = request.form.get('password')
-    remember = True if request.form.get('remember') else False
-
-    user = User.query.filter_by(email=email).first()
-
-    # check if the user actually exists
-    # take the user-supplied password, hash it, and compare it to the hashed password in the database
-    if not user or not check_password_hash(user.password, password):
-        flash('Please check your login details and try again.')
-        return redirect(url_for('app.login')) # if the user doesn't exist or password is wrong, reload the page
-
-    # if the above check passes, then we know the user has the right credentials
-    login_user(user, remember=remember)
-    return redirect(url_for('app.profile'))
+from werkzeug.urls import url_parse
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    if current_user.is_authenticated:
+        return redirect(url_for('index'))
+    form = LoginForm()
+    if form.validate_on_submit():
+        user = get_user(form.email.data)
+        if user is not None and user.check_password(form.password.data):
+            login_user(user, remember=form.remember_me.data)
+            next_page = request.args.get('next')
+            if not next_page or url_parse(next_page).netloc != '':
+                next_page = url_for('index')
+            return redirect(next_page)
+    return render_template('login_form.html', form=form)
 ##
 
 
