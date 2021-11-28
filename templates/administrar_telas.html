@@ -46,7 +46,7 @@ h1 {
 <form action="" method="POST">
 <div id="verde" style="border-width:2px;">
 
-<img src="../static/telas/{{elem1[0]}}.jpeg" height="40%" width="30%"/>
+<img src="data:{{elem1[7]}};base64, {{elem1[6]}}" height="40%" width="30%" />
 <div style="float:right;width:68%;height:40%">
 <p>Nombre del producto: <input type="varchar" name="nombre" min="0" max="30" value= "{{elem1[1]}}"></p>
 <p>Precio Metro Cuadrado: <input type="number" name="precio" min="0" max="100000" value="{{elem1[2]}}">
