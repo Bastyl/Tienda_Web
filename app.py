@@ -3,6 +3,7 @@ from flask import request, flash, Blueprint
 import datetime
 from flask import Flask
 import psycopg2
+import os
 
 DATABASE_URL = os.environ['DATABASE_URL']
 
