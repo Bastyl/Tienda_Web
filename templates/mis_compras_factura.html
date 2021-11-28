@@ -15,17 +15,17 @@ h1 {
 
 <body>
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <a class="navbar-brand" href="index">Inicio</a>
+    <a class="navbar-brand" href="../../../index">Inicio</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarColor02">
       <ul class="navbar-nav mr-auto">
         <li class="nav-item active">
-          <a class="nav-link" href="ver_cojines">Ver Cojines</a>
+          <a class="nav-link" href="../../../ver_cojines">Ver Cojines</a>
         </li>
         <li class="nav-item active">
-          <a class="nav-link" href="armatucojin">Arma tu cojin</a>
+          <a class="nav-link" href="../../../armatucojin">Arma tu cojin</a>
         </li>
       </ul>
       <form class="form-inline" action="/miscompras">
@@ -38,7 +38,7 @@ h1 {
   </nav>
 <h1>IMAGEN FACTURA:</h1>
 
-<img src="../../../static/facturas/{{codigo}}.jpeg" height="40%" width="30%"/>
+<img src="data:{{datos[3]}};base64, {{datos[2]}}" height="40%" width="30%" />
 
 </body>
 </html>
