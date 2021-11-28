@@ -42,7 +42,7 @@ h1 {
 
 {% for elem1 in datos %}
 <div id="verde" style="border-width:2px;border-style:solid;border-color:black;">
-<img src="../static/cojines/{{elem1[0]}}.jpeg" height="40%" width="30%"/>
+<img src="data:{{elem1[18]}};base64, {{elem1[17]}}" height="40%" width="30%" />
 <div style="float:right;width:68%;height:40%">
 <b>Datos:</b>
 <p>{{elem1[2]}} </p>
