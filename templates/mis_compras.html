@@ -69,7 +69,7 @@ h1 {
 
 {% for elem1 in pedidos %}
 <div id="verde" style="border-width:2px;border-style:solid;border-color:black;">
-<img src="../static/telas/{{elem1[17]}}.jpeg" height="40%" width="30%"/>
+<img src="data:{{elem1[27]}};base64, {{elem1[26]}}" height="40%" width="30%" />
 <div style="float:right;width:68%;height:40%">
 <p><b>Datos:</b></p>
 <p><b>Nombre del producto:</b>  Cojin Armado</p>
