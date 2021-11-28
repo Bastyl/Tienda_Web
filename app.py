@@ -303,7 +303,7 @@ def administrar():
 
 @app.route('/administrar_cojines',methods=['POST','GET'])
 def administrar_cojines():
-	sql = """SELECT * FROM producto, caracteristicas_cojin, relleno, tela WHERE producto.tipo_producto ='%s' AND producto.caracteristicas_id = caracteristicas_cojin.id AND caracteristicas_cojin.id_relleno = relleno.id AND caracteristicas_cojin.id_tela = tela.id ORDER BY producto.id;"""%('cojin')
+	sql = """SELECT * FROM producto, caracteristicas_cojin, relleno, tela,imagen WHERE producto.tipo_producto ='%s' AND producto.caracteristicas_id = caracteristicas_cojin.id AND caracteristicas_cojin.id_relleno = relleno.id AND caracteristicas_cojin.id_tela = tela.id AND caracteristicas_cojin.id = imagen.id_tela ORDER BY producto.id;"""%('cojin')
 	cur.execute(sql)
 	productos = cur.fetchall()
 
@@ -317,7 +317,8 @@ def administrar_cojines():
   			sql = """UPDATE producto SET titulo = '%s',stock = '%d', precio_unitario = '%d' WHERE id = '%d';"""%(nombre,stock,precio,codigo_id)
   			cur.execute(sql)
   			conn.commit()
-  			sql = """SELECT * FROM producto, caracteristicas_cojin, relleno, tela WHERE producto.tipo_producto ='%s' AND producto.caracteristicas_id = caracteristicas_cojin.id AND caracteristicas_cojin.id_relleno = relleno.id AND caracteristicas_cojin.id_tela = tela.id ORDER BY producto.id;"""%('cojin')
+
+  			sql = """SELECT * FROM producto, caracteristicas_cojin, relleno, tela,imagen WHERE producto.tipo_producto ='%s' AND producto.caracteristicas_id = caracteristicas_cojin.id AND caracteristicas_cojin.id_relleno = relleno.id AND caracteristicas_cojin.id_tela = tela.id AND caracteristicas_cojin.id = imagen.id_tela ORDER BY producto.id;"""%('cojin')
   			cur.execute(sql)
   			productos = cur.fetchall()
 
@@ -344,7 +345,11 @@ def administrar_cojines():
 				cur.execute(sql)
 				conn.commit()
 
-				sql = """SELECT * FROM producto, caracteristicas_cojin, relleno, tela WHERE producto.tipo_producto ='%s' AND producto.caracteristicas_id = caracteristicas_cojin.id AND caracteristicas_cojin.id_relleno = relleno.id AND caracteristicas_cojin.id_tela = tela.id ORDER BY producto.id;"""%('cojin')
+				sql = """DELETE FROM imagen WHERE imagen.id_tela = '%d';"""%(c)
+				cur.execute(sql)
+				conn.commit()
+
+				sql = """SELECT * FROM producto, caracteristicas_cojin, relleno, tela,imagen WHERE producto.tipo_producto ='%s' AND producto.caracteristicas_id = caracteristicas_cojin.id AND caracteristicas_cojin.id_relleno = relleno.id AND caracteristicas_cojin.id_tela = tela.id AND caracteristicas_cojin.id = imagen.id_tela ORDER BY producto.id;"""%('cojin')
 				cur.execute(sql)
 				productos = cur.fetchall()
 
@@ -412,6 +417,11 @@ def ingresar_cojin():
 		altura = int(request.form['altura'])
 		ancho = int(request.form['ancho'])
 
+		pic = request.files['adjunto']
+		filename = pic.mimetype
+		image_string = base64.b64encode(pic.read())
+		pic = image_string.decode()
+
 
 		sql = """INSERT INTO caracteristicas_cojin (id_relleno, altura, ancho, id_tela )
 		VALUES ('%d','%d','%d','%d') RETURNING id"""%(relleno,altura,ancho,tela)
@@ -422,6 +432,10 @@ def ingresar_cojin():
 
 		sql = """INSERT INTO producto (tipo_producto, titulo, caracteristicas_id, stock, precio_unitario)
 		VALUES ('%s','%s','%d','%d','%d')"""%('cojin',nombre,id_caracteristica,stock,precio)
+		cur.execute(sql)
+		conn.commit()
+
+		sql = """INSERT INTO imagen (id_tela,img,filename) VALUES ('%d','%s','%s')"""%(id_caracteristica,pic,filename)
 		cur.execute(sql)
 		conn.commit()
 
