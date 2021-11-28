@@ -319,6 +319,26 @@ def administrar():
 
 	return render_template("administrar_web.html",datos=datos,pedidos=pedidos)
 
+@app.route('/administrar/<id>/<id_producto>',methods=['POST','GET'])
+def administrar_factura(id,id_producto):
+	codigo_factura = int(id)
+	codigo_producto = int(id_producto)
+	
+	sql = """SELECT * FROM factura WHERE factura.id_compra = '%d'"""%(codigo_factura)
+	cur.execute(sql)
+	factura = cur.fetchall()
+	data1 = factura[0]
+
+	sql = """SELECT * FROM imagen WHERE imagen.id_tela = '%d'"""%(codigo_producto)
+	cur.execute(sql)
+	factura = cur.fetchall()
+	data2 = factura[0]
+
+	print(data2)
+	print(data1)
+
+	return render_template("administrar_factura.html",datos1=data1,datos2=data2)
+
 @app.route('/administrar_cojines',methods=['POST','GET'])
 def administrar_cojines():
 	sql = """SELECT * FROM producto, caracteristicas_cojin, relleno, tela,imagen WHERE producto.tipo_producto ='%s' AND producto.caracteristicas_id = caracteristicas_cojin.id AND caracteristicas_cojin.id_relleno = relleno.id AND caracteristicas_cojin.id_tela = tela.id AND caracteristicas_cojin.id = imagen.id_tela ORDER BY producto.id;"""%('cojin')
