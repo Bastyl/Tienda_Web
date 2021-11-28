@@ -2,8 +2,6 @@ from flask import render_template,redirect,url_for
 from flask import request, flash, Blueprint
 import datetime
 from flask import Flask
-
-import os, json, boto3
 import psycopg2
 
 DATABASE_URL = os.environ['DATABASE_URL']
