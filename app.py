@@ -300,8 +300,16 @@ def administrar():
 			cur.execute(sql)
 			conn.commit()
 
+			sql = """DELETE FROM factura WHERE factura.id_compra = '%d';"""%(codigo)
+			cur.execute(sql)
+			conn.commit()
+
 		if request.form['boton'] == 'Eliminar' and estado == 'cancelado':
 			sql = """DELETE FROM compras WHERE compras.id = '%d';"""%(codigo)
+			cur.execute(sql)
+			conn.commit()
+
+			sql = """DELETE FROM factura WHERE factura.id_compra = '%d';"""%(codigo)
 			cur.execute(sql)
 			conn.commit()
 
@@ -333,9 +341,6 @@ def administrar_factura(id,id_producto):
 	cur.execute(sql)
 	factura = cur.fetchall()
 	data2 = factura[0]
-
-	print(data2)
-	print(data1)
 
 	return render_template("administrar_factura.html",datos1=data1,datos2=data2)
 
