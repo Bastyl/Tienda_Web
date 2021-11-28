@@ -48,7 +48,7 @@ h1 {
 
 {% for elem1 in compras %}
 <div id="verde" style="border-width:2px;border-style:solid;border-color:black;">
-<img src="../static/cojines/{{elem1[9]}}.jpeg" height="40%" width="30%"/>
+<img src="data:{{elem1[32]}};base64, {{elem1[31]}}" height="40%" width="30%" />
 <div style="float:right;width:68%;height:40%">
 <p><b>Datos:</b></p>
 <p><b>Nombre del producto:</b>{{elem1[16]}}</p>
