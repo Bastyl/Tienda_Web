@@ -509,10 +509,3 @@ def ingresar_tela():
 
 	return render_template("administrar_creartela.html")
 
-
-@app.route('/administrar/<id>/<id_producto>',methods=['POST','GET'])
-def ver_facturayproducto(id,id_producto):
-	codigo_factura = id
-	codigo_producto = id_producto
-	print(codigo_producto)
-	return render_template("administrar_verfacturayproducto.html",codigo=codigo_factura,codigo2=codigo_producto)
