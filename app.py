@@ -48,7 +48,7 @@ def submit_form():
 @app.route('/sign-s3/')
 def sign_s3():
   # Load necessary information into the application
-  S3_BUCKET = os.environ.get('S3_BUCKET_NAMEs')
+  S3_BUCKET = os.environ.get('S3_BUCKET_NAME')
 
   # Load required data from the request
   file_name = request.args.get('file-name')
