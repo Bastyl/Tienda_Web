@@ -411,7 +411,7 @@ def administrar_cojines():
 @app.route('/administrar_telas',methods=['POST','GET'])
 def administrar_telas():
 
-	sql = """SELECT * FROM tela_armados ;"""
+	sql = """SELECT * FROM tela_armados, imagen WHERE tela_armados.id = imagen.id_tela;"""
 	cur.execute(sql)
 	telas = cur.fetchall()
 
@@ -425,7 +425,7 @@ def administrar_telas():
 			sql = """UPDATE tela_armados SET nombre = '%s',precio_metrocuadrado = '%d', estado = '%s' WHERE id = '%d';"""%(nombre,precio,estado,codigo_id)
 			cur.execute(sql)
 			conn.commit()
-			sql = """SELECT * FROM tela_armados ;"""
+			sql = """SELECT * FROM tela_armados, imagen WHERE tela_armados.id = imagen.id_tela;"""
 			cur.execute(sql)
 			telas = cur.fetchall()
 			return render_template("administrar_telas.html",telas=telas,a=True,b=True)
@@ -440,7 +440,12 @@ def administrar_telas():
 				sql = """DELETE FROM tela_armados WHERE tela_armados.id = '%d';"""%(codigo_id)
 				cur.execute(sql)
 				conn.commit()
-				sql = """SELECT * FROM tela_armados ;"""
+
+				sql = """DELETE FROM imagen WHERE imagen.id_tela = '%d';"""%(codigo_id)
+				cur.execute(sql)
+				conn.commit()
+
+				sql = """SELECT * FROM tela_armados, imagen WHERE tela_armados.id = imagen.id_tela;"""
 				cur.execute(sql)
 				telas = cur.fetchall()
 
@@ -484,7 +489,19 @@ def ingresar_tela():
 		precio = int(request.form['precio'])
 		estado = "disponible"
 
-		sql = """INSERT INTO tela_armados (nombre,precio_metrocuadrado,estado) VALUES ('%s', '%d','%s')"""%(nombre,precio,estado)
+		pic = request.files['adjunto']
+		filename = pic.mimetype
+		image_string = base64.b64encode(pic.read())
+
+		pic = image_string.decode()
+
+		sql = """INSERT INTO tela_armados (nombre,precio_metrocuadrado,estado) VALUES ('%s', '%d','%s') RETURNING id"""%(nombre,precio,estado)
+		cur.execute(sql)
+		conn.commit()
+		a = cur.fetchall()
+		id_caracteristica = a[0][0]
+
+		sql = """INSERT INTO imagen (id_tela,img,filename) VALUES ('%d','%s','%s')"""%(id_caracteristica,pic,filename)
 		cur.execute(sql)
 		conn.commit()
 
