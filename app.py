@@ -23,7 +23,7 @@ def index():
 @app.route('/ver_cojines',methods=['POST','GET'])
 def ver_cojines():
 
-	sql = """SELECT * FROM producto, caracteristicas_cojin, relleno, tela WHERE producto.tipo_producto ='%s' AND producto.caracteristicas_id = caracteristicas_cojin.id AND caracteristicas_cojin.id_relleno = relleno.id AND caracteristicas_cojin.id_tela = tela.id;"""%('cojin')
+	sql = """SELECT * FROM producto, caracteristicas_cojin, relleno, tela, imagen WHERE producto.tipo_producto ='%s' AND producto.caracteristicas_id = caracteristicas_cojin.id AND caracteristicas_cojin.id_relleno = relleno.id AND caracteristicas_cojin.id_tela = tela.id AND caracteristicas_cojin.id = imagen.id_tela;"""%('cojin')
 	cur.execute(sql)
 	lista_cojines = cur.fetchall()
 
@@ -31,7 +31,7 @@ def ver_cojines():
 
 @app.route('/ver_cojines/<id>',methods=['GET','POST'])
 def cojin_especifico(id):
-	sql = """SELECT * FROM producto, caracteristicas_cojin, relleno, tela WHERE producto.id = '%s' AND producto.caracteristicas_id = caracteristicas_cojin.id AND caracteristicas_cojin.id_relleno = relleno.id AND caracteristicas_cojin.id_tela = tela.id;"""%(id)
+	sql = """SELECT * FROM producto, caracteristicas_cojin, relleno, tela, imagen WHERE producto.id = '%s' AND producto.caracteristicas_id = caracteristicas_cojin.id AND caracteristicas_cojin.id_relleno = relleno.id AND caracteristicas_cojin.id_tela = tela.id AND caracteristicas_cojin.id = imagen.id_tela;"""%(id)
 	cur.execute(sql)
 	cojin_especifico = cur.fetchall()
 	return render_template("cojin_especifico.html",datos=cojin_especifico)
