@@ -42,7 +42,7 @@ def comprar(id):
 
 	cantidad = int(request.args.get('cantidad'))
 
-	sql = """SELECT * FROM producto, caracteristicas_cojin, relleno, tela WHERE producto.id = '%s' AND producto.caracteristicas_id = caracteristicas_cojin.id AND caracteristicas_cojin.id_relleno = relleno.id AND caracteristicas_cojin.id_tela = tela.id;"""%(id)
+	sql = """SELECT * FROM producto, caracteristicas_cojin, relleno, tela, imagen WHERE producto.id = '%s' AND producto.caracteristicas_id = caracteristicas_cojin.id AND caracteristicas_cojin.id_relleno = relleno.id AND caracteristicas_cojin.id_tela = tela.id AND caracteristicas_cojin.id = imagen.id_tela;"""%(id)
 	cur.execute(sql)
 	cojin_especifico = cur.fetchall()
 
@@ -68,8 +68,20 @@ def comprar(id):
 		pendiente = "pendiente"
 		pago = cantidad*valor_unitario
 
+		pic = request.files['adjunto']
+		filename = pic.mimetype
+		image_string = base64.b64encode(pic.read())
+		pic = image_string.decode()
+
+
 		sql = """INSERT INTO compras (nombre_comprador,apellido_comprador,rut,mail,telefono,ciudad,comuna,direccion,id_producto,cantidad, estado, fecha,pagado)
-		VALUES ('%s','%s','%d','%s','%d','%s','%s','%s','%d','%d','%s','%s','%d');"""%(nombre,apellido,rut,mail,telefono,ciudad,comuna,direccion,id_producto, cantidad, pendiente,fecha,pago)
+		VALUES ('%s','%s','%d','%s','%d','%s','%s','%s','%d','%d','%s','%s','%d') RETURNING id"""%(nombre,apellido,rut,mail,telefono,ciudad,comuna,direccion,id_producto, cantidad, pendiente,fecha,pago)
+		cur.execute(sql)
+		conn.commit()
+		a = cur.fetchall()
+		id_caracteristica = a[0][0]
+
+		sql = """INSERT INTO factura (id_compra,img,filename) VALUES ('%d','%s','%s')"""%(id_caracteristica,pic,filename)
 		cur.execute(sql)
 		conn.commit()
 
@@ -93,9 +105,9 @@ def comprar(id):
 def mis_compras():
 	if request.args.get('rut') != None:
 		rut = int(request.args.get('rut'))
-		sql = """SELECT * FROM compras, producto, caracteristicas_cojin, relleno, tela WHERE
+		sql = """SELECT * FROM compras, producto, caracteristicas_cojin, relleno, tela, imagen, factura WHERE
 		compras.rut = '%d' AND compras.id_producto = producto.id AND producto.caracteristicas_id = caracteristicas_cojin.id 
-		AND caracteristicas_cojin.id_tela = tela.id AND caracteristicas_cojin.id_relleno = relleno.id;"""%(rut)
+		AND caracteristicas_cojin.id_tela = tela.id AND caracteristicas_cojin.id_relleno = relleno.id AND caracteristicas_cojin.id = imagen.id_tela AND compras.id = factura.id_compra;"""%(rut)
 		cur.execute(sql)
 		compras = cur.fetchall()
 
@@ -105,7 +117,6 @@ def mis_compras():
 		cur.execute(sql)
 		pedidos = cur.fetchall()
 
-		print(pedidos)
 
 		return render_template("mis_compras.html",compras=compras,pedidos=pedidos)
 
@@ -113,10 +124,17 @@ def mis_compras():
 
 @app.route('/miscompras/rut=<rut>/<id>/<id_producto>',methods=['POST','GET'])
 def mis_compras_factura(rut,id,id_producto):
-	codigo_factura = id
+	codigo_factura = int(id)
 	codigo_producto = id_producto
-	print(codigo_producto)
-	return render_template("mis_compras_factura.html",codigo=codigo_factura,codigo2=codigo_producto)
+	
+	sql = """SELECT * FROM factura WHERE factura.id_compra = '%d'"""%(codigo_factura)
+	cur.execute(sql)
+	factura = cur.fetchall()
+	data = factura[0]
+
+	print(data)
+
+	return render_template("mis_compras_factura.html",codigo=codigo_factura,codigo2=codigo_producto,datos=data)
 
 @app.route('/armatucojin',methods=['POST','GET'])
 def armar_cojin():
