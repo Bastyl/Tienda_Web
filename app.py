@@ -17,7 +17,7 @@ app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = os.environ['HEROKU_POSTGRESQL_ORANGE_URL']
 db.init_app(app)
 
-with app.app_context():
+db.create_all()
 
 
 DATABASE_URL = os.environ['DATABASE_URL']
