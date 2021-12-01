@@ -13,12 +13,6 @@ from models import *
 from flask_login import LoginManager,login_user,login_required, current_user, logout_user
 
 app = Flask(__name__)
-#app.secret_key = 'sa3iedoaoiopdia92jdkaojkASD@'
-app.config['SQLALCHEMY_DATABASE_URI'] = os.environ['DATABASE_URL']
-db.init_app(app)
-
-with app.app_context():
-    db.create_all()
 
 DATABASE_URL = os.environ['DATABASE_URL']
 
