@@ -6,28 +6,12 @@ import psycopg2
 import os
 import base64
 
-from werkzeug.security import generate_password_hash, check_password_hash
-from flask_sqlalchemy import SQLAlchemy
-db = SQLAlchemy()
-from models import *
-from flask_login import LoginManager,login_user,login_required, current_user, logout_user
-
 app = Flask(__name__)
 
-app.config['SQLALCHEMY_DATABASE_URI'] = os.environ['HEROKU_POSTGRESQL_ORANGE_URL']
-db.init_app(app)
-db.create_all()
 DATABASE_URL = os.environ['DATABASE_URL']
 
 conn = psycopg2.connect(DATABASE_URL, sslmode='require')
 cur = conn.cursor()
-
-login_manager = LoginManager()
-login_manager.login_view = 'login'
-login_manager.init_app(app)
-@login_manager.user_loader
-def load_user(user_id):
-    return User.query.get(int(user_id))
 
 @app.route('/')
 @app.route('/index',methods=['POST','GET'])
